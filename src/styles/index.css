@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Balodi Workspace — tokens
+   El naranja se extrajo de las referencias de marca (#FD3A00).
+   Cambiar un token aca actualiza toda la app.
+   ========================================================================== */
+:root {
+  --balodi-orange: #fd3a00;
+  --balodi-orange-strong: #d92f00;
+  --balodi-orange-soft: #fff1ec;
+  --balodi-black: #121010;
+  --balodi-white: #ffffff;
+
+  --surface: #ffffff;
+  --surface-muted: #f5f4f2;
+  --surface-sunken: #ecebe8;
+  --border: #e2e0dc;
+  --border-strong: #cfccc6;
+
+  --text-primary: #121010;
+  --text-secondary: #6b6663;
+  --text-inverse: #ffffff;
+
+  --success: #17845a;
+  --warning: #b7791f;
+  --danger: #c02626;
+
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  --shadow-card: 0 1px 2px rgb(18 16 16 / 0.05);
+  --shadow-pop: 0 8px 28px -12px rgb(18 16 16 / 0.28);
+
+  --font-display: "Poppins", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-ui: "Inter", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Preparado para modo oscuro (fuera del MVP: todavia no hay switch). */
+[data-theme="dark"] {
+  --surface: #171514;
+  --surface-muted: #1f1c1b;
+  --surface-sunken: #100e0e;
+  --border: #2e2a29;
+  --border-strong: #423d3b;
+  --text-primary: #f7f5f3;
+  --text-secondary: #a29c98;
+}
+
+@theme inline {
+  --color-orange-brand: var(--balodi-orange);
+  --color-orange-strong: var(--balodi-orange-strong);
+  --color-orange-soft: var(--balodi-orange-soft);
+  --color-ink: var(--balodi-black);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-line: var(--border);
+  --color-line-strong: var(--border-strong);
+  --color-primary: var(--text-primary);
+  --color-secondary: var(--text-secondary);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --font-display: var(--font-display);
+  --font-ui: var(--font-ui);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    margin: 0;
+    background: var(--surface);
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    font-weight: 800;
+  }
+  :focus-visible {
+    outline: 2px solid var(--balodi-orange);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  ::selection {
+    background: var(--balodi-orange);
+    color: #fff;
+  }
+  button { font-family: inherit; }
+}
+
+@utility display-tight {
+  font-family: var(--font-display);
+  font-weight: 900;
+  letter-spacing: -0.045em;
+  line-height: 0.9;
+}
+
+@utility grain {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.22;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  }
+}
+
+@utility scrollbar-slim {
+  &::-webkit-scrollbar { height: 10px; width: 10px; }
+  &::-webkit-scrollbar-thumb {
+    background: var(--border-strong);
+    border-radius: 999px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+  &::-webkit-scrollbar-track { background: transparent; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
